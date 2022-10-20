@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title>
+            User details
+        </title>
+    
+    </head>
+    <body>
+        <table style="margin-left: 500px;">
+            <thead> 
+                <th>Sno</th>
+                <th>Name</th>
+                <th>Email Id</th>
+                <th>Contact No</th>
+                <th>Skills</th>
+            </thead>
+            <tbody id="tbody1">
+              
+            </tbody>
+        </table>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+        <script id="MainScript">
+           // Your web app's Firebase configuration
+        const firebaseConfig = {
+        apiKey: "AIzaSyB7hpR1n-JksiPqTG_nIZwArc4d0q2CPr8",
+        authDomain: "registration-form-50c47.firebaseapp.com",
+        databaseURL: "https://registration-form-50c47-default-rtdb.firebaseio.com",
+        projectId: "registration-form-50c47",
+        storageBucket: "registration-form-50c47.appspot.com",
+        messagingSenderId: "592796188073",
+        appId: "1:592796188073:web:16e08565993c4bbfd058b8"
+    };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+            function selectAlldata(){
+                firebase.database().ref("RegistrationForm").once('value',
+                function(AllRecords){
+                    AllRecords.forEach(
+                        function(CurrentRecord){
+                            var name=CurrentRecord.val().name;
+                            var email=CurrentRecord.val().email;
+                            var contact=CurrentRecord.val().contact;
+                            var skills=CurrentRecord.val().skills;
+                            AddItemsToTable(name,email,contact,skills);
+                        }
+                    );
+                });
+            }
+            window.onload=selectAlldata;
+            console.onload=selectAlldata;
+            
+            //------------filling table---------//
+            var stdNo=0;
+            function AddItemsToTable(name,email,contact,skills){
+                var tbody=document.getElementById('tbody1');
+                var trow=document.createElement('tr');
+                var td1=document.createElement('td');
+                var td2=document.createElement('td');
+                var td3=document.createElement('td');
+                var td4=document.createElement('td');
+                var td5=document.createElement('td');
+                td1.innerHTML=++stdNo;
+                td2.innerHTML=name;
+                td3.innerHTML=email;
+                td4.innerHTML=contact;
+                td5.innerHTML=skills;
+                trow.appendChild(td1);
+                trow.appendChild(td2);
+                trow.appendChild(td3);
+                trow.appendChild(td4);
+                trow.appendChild(td5);
+                tbody.appendChild(trow);
+            }
+        </script>
+    </body>
+</html>
