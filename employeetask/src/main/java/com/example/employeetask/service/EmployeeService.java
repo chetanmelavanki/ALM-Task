@@ -8,6 +8,9 @@ public interface EmployeeService {
 
 	boolean saveData(EmployeeEntity employeeEntity);
 
+//	boolean isValidId(int empId);
+
+
 
 	
 }

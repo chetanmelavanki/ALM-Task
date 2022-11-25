@@ -15,7 +15,7 @@ public class EmployeeServiceimpl implements EmployeeService {
 	@Autowired
 	EmployeeRepo employeeRepo;
 	
-	public static Map<String, String> map=new HashMap<>();
+	public static Map<Integer, String> map=new HashMap<>();
 
 	@Override
 	public boolean validateEmployee(EmployeeEntity employeeEntity) {
@@ -30,7 +30,7 @@ public class EmployeeServiceimpl implements EmployeeService {
 		} else {
 			flag = false;
 			System.out.println("Employe Name is Invalid");
-			map.put("eName", "please enter employee name");
+			map.put(1, "please enter employee name");
 			return flag;
 		}
 		if (employeeEntity.getEmpCourse() != null && !employeeEntity.getEmpCourse().isBlank()
@@ -41,7 +41,7 @@ public class EmployeeServiceimpl implements EmployeeService {
 		} else {
 			flag = false;
 			System.out.println("Employe Course is Invalid");
-			map.put("eCource", "please enter employee course");
+			map.put(2, "please enter employee course");
 			return flag;
 		}
 		if (employeeEntity.getEmpGender() != null && !employeeEntity.getEmpGender().isBlank()
@@ -52,7 +52,7 @@ public class EmployeeServiceimpl implements EmployeeService {
 		} else {
 			flag = false;
 			System.out.println("Employe gender is Invalid");
-			map.put("eGender", "please select employee gender");
+			map.put(3, "please select employee gender");
 			return flag;
 		}
 
@@ -64,7 +64,7 @@ public class EmployeeServiceimpl implements EmployeeService {
 		} else {
 			flag = false;
 			System.out.println("Employe mail is Invalid");
-			map.put("eMail", "please enter employee mail id");
+			map.put(4, "please enter employee mail id");
 			return flag;
 		}
 
@@ -76,7 +76,7 @@ public class EmployeeServiceimpl implements EmployeeService {
 		} else {
 			flag = false;
 			System.out.println("Employe phone is Invalid");
-			map.put("ePhone", "please enter employee phone no");
+			map.put(5, "please enter employee phone no");
 			return flag;
 		}
 
@@ -88,7 +88,7 @@ public class EmployeeServiceimpl implements EmployeeService {
 		} else {
 			flag = false;
 			System.out.println("Employe Dob is Invalid");
-			map.put("eDob", "please enter employee dob");
+			map.put(6, "please enter employee dob");
 			return flag;
 		}
 
@@ -100,7 +100,7 @@ public class EmployeeServiceimpl implements EmployeeService {
 		} else {
 			flag = false;
 			System.out.println("Employe Address is Invalid");
-			map.put("eAddress", "please enter employee current address");
+			map.put(7, "please enter employee current address");	
 			return flag;
 		}
 
@@ -111,7 +111,7 @@ public class EmployeeServiceimpl implements EmployeeService {
 		} else {
 			flag = false;
 			System.out.println("Employe File is Invalid");
-			map.put("eFile", "please attach identity proof");
+			map.put(8, "please attach identity proof");
 			return flag;
 		}
 
@@ -123,6 +123,14 @@ public class EmployeeServiceimpl implements EmployeeService {
 		employeeRepo.save(employeeEntity);
 		return true;
 	}
+
+//	@Override
+//	public boolean isValidId(int empId) {
+//		employeeEntity= employeeRepo.findById(empId).get();
+//		return true;
+//	}
+
+	
 
 
 

@@ -44,12 +44,20 @@ input[type='submit'] {
 </style>
 </head>
 <body>
-	<h1 style="color: green; text-align: center;">${eSave}</h1>
+	<h1 style="color: green; text-align: center;">${eSave}${noEmp}</h1>
 	<div>
 		<form action="getEmployee">
 		<label><b>Enter employee id to fetch deatils:</b></label>
         <br>  
 			<input type="text" name="empId"><br> <input
+				type="submit">
+		</form>
+	</div>
+		<div>
+		<form action="deleteEmployeById">
+		<label><b>Enter employee id to delete deatils:</b></label>
+        <br>  
+			<input type="text" name="dltEmpId"><br> <input
 				type="submit">
 		</form>
 	</div>

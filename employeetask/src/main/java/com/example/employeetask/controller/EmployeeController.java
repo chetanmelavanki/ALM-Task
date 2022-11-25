@@ -19,12 +19,10 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
-	
-	@Autowired
-	private EmployeeServiceimpl employeeServiceimpl;
 
 	@Autowired
 	private EmployeeRepo employeeRepo;
+
 
 	public EmployeeController() {
 		System.out.println("EmployeeController() Invoked");
@@ -63,15 +61,15 @@ public class EmployeeController {
 			}
 		} else {
 			System.out.println("Employee details is invalid");
-			Map<String, String> map = employeeServiceimpl.map;
-			model.addAttribute("errName", map.get("eName"));
-			model.addAttribute("errCource", map.get("eCource"));
-			model.addAttribute("errGender", map.get("eGender"));
-			model.addAttribute("errMail", map.get("eMail"));
-			model.addAttribute("errPhone", map.get("ePhone"));
-			model.addAttribute("errDob", map.get("eDob"));
-			model.addAttribute("errAddress", map.get("eAddress"));
-			model.addAttribute("errFile", map.get("eFile"));
+			Map<Integer, String> map = EmployeeServiceimpl.map;
+			model.addAttribute("errName", map.get(1));
+			model.addAttribute("errCource", map.get(2));
+			model.addAttribute("errGender", map.get(3));
+			model.addAttribute("errMail", map.get(4));
+			model.addAttribute("errPhone", map.get(5));
+			model.addAttribute("errDob", map.get(6));
+			model.addAttribute("errAddress", map.get(7));
+			model.addAttribute("errFile", map.get(8));
 		}
 		return "home";
 	}
@@ -80,15 +78,74 @@ public class EmployeeController {
 	public String getEmployee(@RequestParam int empId, Model model) {
 		System.out.println("getEmployee() invoked");
 		EmployeeEntity employeeEntity = employeeRepo.findById(empId).get();
-		model.addAttribute("empName", employeeEntity.getEmpName());
-		model.addAttribute("empCourse", employeeEntity.getEmpCourse());
-		model.addAttribute("empGender", employeeEntity.getEmpGender());
-		model.addAttribute("empEmail", employeeEntity.getEmpMail());
-		model.addAttribute("empPhone", employeeEntity.getEmpPhone());
-		model.addAttribute("empDob", employeeEntity.getEmpDate());
-		model.addAttribute("empAddress", employeeEntity.getEmpAddress());
-		model.addAttribute("empFile", employeeEntity.getEmpFile());
+			
+			model.addAttribute("empName", employeeEntity.getEmpName());
+			model.addAttribute("empCourse", employeeEntity.getEmpCourse());
+			model.addAttribute("empGender", employeeEntity.getEmpGender());
+			model.addAttribute("empEmail", employeeEntity.getEmpMail());
+			model.addAttribute("empPhone", employeeEntity.getEmpPhone());
+			model.addAttribute("empDob", employeeEntity.getEmpDate());
+			model.addAttribute("empAddress", employeeEntity.getEmpAddress());
+			model.addAttribute("empFile", employeeEntity.getEmpFile());
 
 		return "empdata";
 	}
+
+	@RequestMapping("/deleteEmployeById")
+	public String deleteEmployeById(@RequestParam int dltEmpId,Model model) {
+		System.out.println("deleteEmployeById() invoked");
+		employeeRepo.deleteById(dltEmpId);
+		model.addAttribute("empDelete", "enter employe id:"+dltEmpId+" deleted successfully");
+		return "fetch";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	@RequestMapping("/updateEmployeById")
+//	public String updateEmployeById(@RequestParam int updateEmpId,Model model) {
+//		System.out.println("deleteEmployeById() invoked");
+//		employeeRepo.
+//		return "fetch";
+//	}
+	
+	
+
+//	@RequestMapping("/getEmployee")
+//	public String getEmployee(@RequestParam int empId, Model model) {
+//		System.out.println("getEmployee() invoked");
+//		boolean isValidId=this.employeeService.isValidId(empId);
+//		if (isValidId==true) {
+//			System.out.println("employee id is valid");
+//			model.addAttribute("empName",employeeEntity.getEmpName() );
+//			model.addAttribute("empCourse", employeeEntity.getEmpCourse());
+//			model.addAttribute("empGender", employeeEntity.getEmpGender());
+//			model.addAttribute("empEmail", employeeEntity.getEmpMail());
+//			model.addAttribute("empPhone", employeeEntity.getEmpPhone());
+//			model.addAttribute("empDob", employeeEntity.getEmpDate());
+//			model.addAttribute("empAddress", employeeEntity.getEmpAddress());
+//			model.addAttribute("empFile", employeeEntity.getEmpFile());
+//			return "empdata";
+//		} else {
+//			System.out.println("employee id not found for :"+empId);
+//			model.addAttribute("noEmp", "employee id not found for :"+empId);
+//			return "fetch";
+//		}
+//		
+//	}
 }
