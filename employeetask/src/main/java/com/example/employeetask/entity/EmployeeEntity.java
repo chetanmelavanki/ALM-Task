@@ -5,12 +5,14 @@ import java.io.File;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "employee_table")
+@NamedQuery(name = "EmployeeEntity.updateEmployeeByEmpId",query = "update EmployeeEntity set empName=:NAME,empCourse=:COURSE,empGender=:GENDER,empMail=:MAIL,empPhone=:PHONE,empDate=:DATE,empAddress=:ADDRESS,empFile=:FILE")
 public class EmployeeEntity {
 
 	@Id

@@ -90,15 +90,31 @@ public class EmployeeController {
 
 		return "empdata";
 	}
+	
+	
 
 	@RequestMapping("/deleteEmployeById")
 	public String deleteEmployeById(@RequestParam int dltEmpId,Model model) {
 		System.out.println("deleteEmployeById() invoked");
 		employeeRepo.deleteById(dltEmpId);
-		model.addAttribute("empDelete", "enter employe id:"+dltEmpId+" deleted successfully");
+		model.addAttribute("empDelete", "entered employe id "+dltEmpId+" deleted successfully");
 		return "fetch";
 	}
 	
+	@RequestMapping("/updateEmployeeByEmpId")
+	public String updateEmployeeByEmpId(@ModelAttribute EmployeeEntity employeeEntity,Model model) {
+		System.out.println("updateEmployeeByEmpId() Invoked");
+		
+		boolean isEmpUpdated=this.employeeService.updateEmployeById(employeeEntity);
+		if (isEmpUpdated) {
+			System.out.println("update employee entity...Thank you");
+			model.addAttribute("updateEmp", "update employee entity...Thank you");
+		} else {
+			System.out.println("Employee entity is not updated");
+			model.addAttribute("updateEmp", "Employee entity is not updated");
+		}
+		return "fetch";
+	}
 	
 	
 	

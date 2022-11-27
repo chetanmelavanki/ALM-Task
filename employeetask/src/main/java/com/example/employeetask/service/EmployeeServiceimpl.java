@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.employeetask.dao.EmployeeDAO;
 import com.example.employeetask.dao.EmployeeRepo;
 import com.example.employeetask.entity.EmployeeEntity;
 
@@ -14,6 +15,9 @@ public class EmployeeServiceimpl implements EmployeeService {
 	
 	@Autowired
 	EmployeeRepo employeeRepo;
+	
+	@Autowired
+	EmployeeDAO employeeDAO;
 	
 	public static Map<Integer, String> map=new HashMap<>();
 
@@ -123,6 +127,23 @@ public class EmployeeServiceimpl implements EmployeeService {
 		employeeRepo.save(employeeEntity);
 		return true;
 	}
+
+	@Override
+	public boolean updateEmployeById(EmployeeEntity employeeEntity) {
+		System.out.println("updateEmployeById() Invoked");
+		
+		return this.employeeDAO.updateEmployee(employeeEntity);
+	}
+
+
+	
+	
+
+	
+	
+	
+	
+	
 
 //	@Override
 //	public boolean isValidId(int empId) {

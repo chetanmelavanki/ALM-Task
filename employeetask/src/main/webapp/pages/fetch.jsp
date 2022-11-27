@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,8 +55,45 @@ input[type='submit'] {
 				type="submit">
 		</form>
 	</div>
+	<div>
+		<form action="updateEmployeeByEmpId">
+		<h4 style="color: green;">${updateEmp}</h4>
+			
+				<div><label for=""><h3>Enter employee id:</h3></label>
+					<input type="text" name="empId">
+				</div>
+				<div><label for="">Enter employee name:</label>
+					<input type="text" name="empName" value="${empName}">
+				</div>
+				<div><label for="">Enter employee course:</label>
+					<input type="text" name="empCourse" value="${empCourse}">
+				</div>
+				<div><label for="">Enter employee gender:</label>
+					<input type="text" name="empGender" value="${empGender}">
+				</div>
+				<div><label for="">Enter employee mail:</label>
+					<input type="text" name="empMail" value="${empEmail}">
+				</div>
+				<div><label for="">Enter employee phone:</label>
+					<input type="text" name="empPhone" value="${empPhone}">
+				</div>
+				<div><label for="">Enter employee dob:</label>
+					<input type="date" name="empDate" value="${empDob}">
+				</div>
+				<div><label for="">Enter employee address:</label>
+					<input type="text" name="empAddress" value="${empAddress}">
+				</div>
+				<div><label for="">attach file:</label>
+					<input type="file" name="empFile" value="${empFile}">
+				</div>
+				<div>
+					<input type="submit" value="submit">
+				</div>
+		</form>
+	</div>
 		<div>
 		<form action="deleteEmployeById">
+		<h4 style="color: red;">${empDelete}</h4>
 		<label><b>Enter employee id to delete deatils:</b></label>
         <br>  
 			<input type="text" name="dltEmpId"><br> <input
