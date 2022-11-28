@@ -1,10 +1,9 @@
 package com.example.employeetask.entity;
 
-import java.io.File;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -12,22 +11,23 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "employee_table")
-@NamedQuery(name = "EmployeeEntity.updateEmployeeByEmpId",query = "update EmployeeEntity set empName=:NAME,empCourse=:COURSE,empGender=:GENDER,empMail=:MAIL,empPhone=:PHONE,empDate=:DATE,empAddress=:ADDRESS,empFile=:FILE")
+@NamedQuery(name = "EmployeeEntity.updateEmployeeByEmpId", query = "update EmployeeEntity set empName=:NAME,empCourse=:COURSE,empGender=:GENDER,empMail=:MAIL,empPhone=:PHONE,empDate=:DATE,empAddress=:ADDRESS,empFile=:FILE")
 public class EmployeeEntity {
 
 	@Id
-	@GenericGenerator(name = "x",strategy = "increment")
+	@GenericGenerator(name = "x", strategy = "increment")
 	@GeneratedValue(generator = "x")
 	private int empId;
 	private String empName;
 	private String empCourse;
 	private String empGender;
 	private String empMail;
-	private String empPhone; 
+	private String empPhone;
 	private String empDate;
 	private String empAddress;
-	private File empFile;
-	
+	@Lob
+	private byte[] empFile;
+
 	public EmployeeEntity() {
 		System.out.println("EmployeeEntity() Invoked");
 	}
@@ -96,11 +96,13 @@ public class EmployeeEntity {
 		this.empAddress = empAddress;
 	}
 
-	public File getEmpFile() {
+	
+
+	public byte[] getEmpFile() {
 		return empFile;
 	}
 
-	public void setEmpFile(File empFile) {
+	public void setEmpFile(byte[] empFile) {
 		this.empFile = empFile;
 	}
 
@@ -110,8 +112,5 @@ public class EmployeeEntity {
 				+ empGender + ", empMail=" + empMail + ", empPhone=" + empPhone + ", empDate=" + empDate
 				+ ", empAddress=" + empAddress + ", empFile=" + empFile + "]";
 	}
-	
-	
-	
-	
+
 }

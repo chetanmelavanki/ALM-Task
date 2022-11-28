@@ -1,5 +1,6 @@
 package com.example.employeetask.service;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,14 +13,14 @@ import com.example.employeetask.entity.EmployeeEntity;
 
 @Service
 public class EmployeeServiceimpl implements EmployeeService {
-	
+
 	@Autowired
 	EmployeeRepo employeeRepo;
-	
+
 	@Autowired
 	EmployeeDAO employeeDAO;
-	
-	public static Map<Integer, String> map=new HashMap<>();
+
+	public static Map<Integer, String> map = new HashMap<>();
 
 	@Override
 	public boolean validateEmployee(EmployeeEntity employeeEntity) {
@@ -104,7 +105,7 @@ public class EmployeeServiceimpl implements EmployeeService {
 		} else {
 			flag = false;
 			System.out.println("Employe Address is Invalid");
-			map.put(7, "please enter employee current address");	
+			map.put(7, "please enter employee current address");
 			return flag;
 		}
 
@@ -131,28 +132,14 @@ public class EmployeeServiceimpl implements EmployeeService {
 	@Override
 	public boolean updateEmployeById(EmployeeEntity employeeEntity) {
 		System.out.println("updateEmployeById() Invoked");
-		
+
 		return this.employeeDAO.updateEmployee(employeeEntity);
 	}
-
-
-	
-	
-
-	
-	
-	
-	
-	
 
 //	@Override
 //	public boolean isValidId(int empId) {
 //		employeeEntity= employeeRepo.findById(empId).get();
 //		return true;
 //	}
-
-	
-
-
 
 }

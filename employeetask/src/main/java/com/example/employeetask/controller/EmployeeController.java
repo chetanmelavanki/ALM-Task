@@ -1,10 +1,17 @@
 package com.example.employeetask.controller;
 
+import java.io.IOException;
 import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.Document;
+
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,13 +29,13 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeRepo employeeRepo;
-
+	
 
 	public EmployeeController() {
 		System.out.println("EmployeeController() Invoked");
 	}
 
-	@RequestMapping("/home")
+	@RequestMapping("")
 	public String getHomePage() {
 		System.out.println("getHomePage() Invoked");
 		return "home";
@@ -78,34 +85,34 @@ public class EmployeeController {
 	public String getEmployee(@RequestParam int empId, Model model) {
 		System.out.println("getEmployee() invoked");
 		EmployeeEntity employeeEntity = employeeRepo.findById(empId).get();
-			
-			model.addAttribute("empName", employeeEntity.getEmpName());
-			model.addAttribute("empCourse", employeeEntity.getEmpCourse());
-			model.addAttribute("empGender", employeeEntity.getEmpGender());
-			model.addAttribute("empEmail", employeeEntity.getEmpMail());
-			model.addAttribute("empPhone", employeeEntity.getEmpPhone());
-			model.addAttribute("empDob", employeeEntity.getEmpDate());
-			model.addAttribute("empAddress", employeeEntity.getEmpAddress());
-			model.addAttribute("empFile", employeeEntity.getEmpFile());
 
-		return "empdata";
+		model.addAttribute("empName", employeeEntity.getEmpName());
+		model.addAttribute("empCourse", employeeEntity.getEmpCourse());
+		model.addAttribute("empGender", employeeEntity.getEmpGender());
+		model.addAttribute("empEmail", employeeEntity.getEmpMail());
+		model.addAttribute("empPhone", employeeEntity.getEmpPhone());
+		model.addAttribute("empDob", employeeEntity.getEmpDate());
+		model.addAttribute("empAddress", employeeEntity.getEmpAddress());
+		model.addAttribute("empFile", employeeEntity.getEmpFile());
+//		System.out.println(employeeEntity.getEmpFile());
+
+		return "fetch";
+	
 	}
-	
-	
 
 	@RequestMapping("/deleteEmployeById")
-	public String deleteEmployeById(@RequestParam int dltEmpId,Model model) {
+	public String deleteEmployeById(@RequestParam int dltEmpId, Model model) {
 		System.out.println("deleteEmployeById() invoked");
 		employeeRepo.deleteById(dltEmpId);
-		model.addAttribute("empDelete", "entered employe id "+dltEmpId+" deleted successfully");
+		model.addAttribute("empDelete", "entered employe id " + dltEmpId + " deleted successfully");
 		return "fetch";
 	}
-	
+
 	@RequestMapping("/updateEmployeeByEmpId")
-	public String updateEmployeeByEmpId(@ModelAttribute EmployeeEntity employeeEntity,Model model) {
+	public String updateEmployeeByEmpId(@ModelAttribute EmployeeEntity employeeEntity, Model model) {
 		System.out.println("updateEmployeeByEmpId() Invoked");
 		
-		boolean isEmpUpdated=this.employeeService.updateEmployeById(employeeEntity);
+		boolean isEmpUpdated = this.employeeService.updateEmployeById(employeeEntity);
 		if (isEmpUpdated) {
 			System.out.println("update employee entity...Thank you");
 			model.addAttribute("updateEmp", "update employee entity...Thank you");
@@ -116,52 +123,19 @@ public class EmployeeController {
 		return "fetch";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	@RequestMapping("/updateEmployeById")
-//	public String updateEmployeById(@RequestParam int updateEmpId,Model model) {
-//		System.out.println("deleteEmployeById() invoked");
-//		employeeRepo.
-//		return "fetch";
-//	}
-	
-	
-
-//	@RequestMapping("/getEmployee")
-//	public String getEmployee(@RequestParam int empId, Model model) {
-//		System.out.println("getEmployee() invoked");
-//		boolean isValidId=this.employeeService.isValidId(empId);
-//		if (isValidId==true) {
-//			System.out.println("employee id is valid");
-//			model.addAttribute("empName",employeeEntity.getEmpName() );
-//			model.addAttribute("empCourse", employeeEntity.getEmpCourse());
-//			model.addAttribute("empGender", employeeEntity.getEmpGender());
-//			model.addAttribute("empEmail", employeeEntity.getEmpMail());
-//			model.addAttribute("empPhone", employeeEntity.getEmpPhone());
-//			model.addAttribute("empDob", employeeEntity.getEmpDate());
-//			model.addAttribute("empAddress", employeeEntity.getEmpAddress());
-//			model.addAttribute("empFile", employeeEntity.getEmpFile());
-//			return "empdata";
-//		} else {
-//			System.out.println("employee id not found for :"+empId);
-//			model.addAttribute("noEmp", "employee id not found for :"+empId);
-//			return "fetch";
-//		}
+	@RequestMapping("/download_document")
+	public void downloadFile(HttpServletResponse httpServletResponse) throws IOException {
+		System.out.println("downloadFile() Invoked");
+		int id=1;
+		EmployeeEntity employeeEntity=employeeRepo.findById(id).get();
+		
+		httpServletResponse.setContentType("application/octet-stream");
+//		String headerKey="Content-Desposition";
+//		String headerValue="attachment; filename="+employeeEntity.getEmpFileName();
 //		
-//	}
+//		httpServletResponse.setHeader(headerKey, headerValue);
+		ServletOutputStream outputStream=httpServletResponse.getOutputStream();
+		outputStream.write(employeeEntity.getEmpFile());
+	}
+
 }

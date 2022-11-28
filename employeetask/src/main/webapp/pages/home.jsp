@@ -115,7 +115,7 @@ input[type='submit'] {
 				birth:</label><br> <input type="date" name="empDate"> <br>
 			<br> Current Address :
 			<textarea name="empAddress" cols="40" rows="2"
-				placeholder="Current Address" value="address">
+				placeholder="Current Address" >
 		</textarea>
 			<br>
 			<br> <label>Attach your Id proof :</label><br> <input
