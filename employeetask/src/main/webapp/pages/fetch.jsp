@@ -64,7 +64,7 @@ body {
 	<h1 style="color: green; text-align: center;">${eSave}${noEmp}</h1>
 	<div>
 		<form action="getEmployee" method="post">
-		<h3 style="color: red;">${errFetch}</h3>
+		<h3 style="color: red;">${errFetch}${errDelete}</h3>
 		<label><b>Enter employee id to fetch deatils:</b></label>
         <br>  
 			<input type="text" name="empId"><br> <input

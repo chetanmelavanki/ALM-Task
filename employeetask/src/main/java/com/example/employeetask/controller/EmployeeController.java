@@ -118,12 +118,12 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/download")
-	public ResponseEntity<ByteArrayResource> downloadFile() {
+	public ResponseEntity<ByteArrayResource> downloadFile(EmployeeEntity employeeEntity) {
 		System.out.println("downloadFile() invoked");
 //	        EmployeeEntity model = employeeService.getFile(filId);
-		EmployeeEntity model = null;
-		model = employeeRepo.getById(model.getEmpId());
-		return ResponseEntity.ok().body(new ByteArrayResource(model.getEmpFile()));
+		
+		employeeEntity = employeeRepo.getById(employeeEntity.getEmpId());
+		return ResponseEntity.ok().body(new ByteArrayResource(employeeEntity.getEmpFile()));
 	}
 
 }
