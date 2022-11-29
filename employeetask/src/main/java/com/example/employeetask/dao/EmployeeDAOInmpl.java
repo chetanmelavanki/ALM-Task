@@ -19,7 +19,7 @@ public class EmployeeDAOInmpl implements EmployeeDAO {
 
 	@Override
 	public boolean updateEmployee(EmployeeEntity employeeEntity) {
-		System.out.println("updateBikeByBikeName invoked from " + this.getClass().getSimpleName());
+		System.out.println("updateEmployee() invoked");
 		Session session = null;
 		Transaction transaction = null;
 		boolean isEmployeeupated = false;

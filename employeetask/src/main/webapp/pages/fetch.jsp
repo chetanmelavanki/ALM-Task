@@ -43,6 +43,8 @@ input[type='submit'] {
 	text-align: center;
 	border-radius: 5px;
 }
+
+
 a {
 	color: red;
 }
@@ -55,12 +57,13 @@ body {
 	text-align: center;
 	background:white;
 }
+
 </style>
 </head>
 <body>
 	<h1 style="color: green; text-align: center;">${eSave}${noEmp}</h1>
 	<div>
-		<form action="getEmployee">
+		<form action="getEmployee" method="post">
 		<h3 style="color: red;">${errFetch}</h3>
 		<label><b>Enter employee id to fetch deatils:</b></label>
         <br>  
@@ -90,13 +93,18 @@ body {
 				<td>${empPhone}</td>
 				<td>${empDob}</td>
 				<td>${empAddress}</td>
-				<td><a th:href="@{/download_document}">download</a> </td>
+			 <td><a href="@{/download}" download>download</a> </td> 
+			<!-- <td><form action="download">
+				<div>
+					<input type="submit" value="submit">
+				</div> -->
+			</form></td>
 			</tbody>
 		</tr>
 	</table>
 	
 	<div>
-		<form action="updateEmployeeByEmpId">
+		<form action="updateEmployeeByEmpId" method="post">
 		<h4 style="color: green;">${updateEmp}</h4>
 			
 				<div><label for=""><h3>Enter employee id to update emp:</h3></label>
@@ -118,13 +126,13 @@ body {
 					<input type="text" name="empPhone" value="${empPhone}">
 				</div>
 				<div><label for="">Enter employee dob:</label>
-					<input type="date" name="empDate" >
+					<input type="date" name="empDate" value="${empDob}">
 				</div>
 				<div><label for="">Enter employee address:</label>
 					<input type="text" name="empAddress" value="${empAddress}">
 				</div>
 				<div><label for="">attach file:</label>
-					<input type="file" name="empFile">
+					<input type="file" name="empFile" value="${empFile}">
 				</div>
 				<div>
 					<input type="submit" value="submit">
@@ -132,7 +140,7 @@ body {
 		</form>
 	</div>
 		<div>
-		<form action="deleteEmployeById">
+		<form action="deleteEmployeById" method="post">
 		<h4 style="color: red;">${empDelete}</h4>
 		<label><b>Enter employee id to delete deatils:</b></label>
         <br>  

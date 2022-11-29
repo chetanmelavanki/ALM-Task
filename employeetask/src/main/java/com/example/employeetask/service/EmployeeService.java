@@ -10,6 +10,6 @@ public interface EmployeeService {
 
 	boolean updateEmployeById(EmployeeEntity employeeEntity);
 
-//	boolean isValidId(int empId);
+	EmployeeEntity getFile(int filId);
 
 }

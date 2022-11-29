@@ -1,14 +1,10 @@
 package com.example.employeetask.controller;
 
-import java.io.IOException;
 import java.util.Map;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.Document;
-
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +25,6 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeRepo employeeRepo;
-	
 
 	public EmployeeController() {
 		System.out.println("EmployeeController() Invoked");
@@ -94,24 +89,15 @@ public class EmployeeController {
 		model.addAttribute("empDob", employeeEntity.getEmpDate());
 		model.addAttribute("empAddress", employeeEntity.getEmpAddress());
 		model.addAttribute("empFile", employeeEntity.getEmpFile());
-//		System.out.println(employeeEntity.getEmpFile());
 
 		return "fetch";
-	
-	}
 
-	@RequestMapping("/deleteEmployeById")
-	public String deleteEmployeById(@RequestParam int dltEmpId, Model model) {
-		System.out.println("deleteEmployeById() invoked");
-		employeeRepo.deleteById(dltEmpId);
-		model.addAttribute("empDelete", "entered employe id " + dltEmpId + " deleted successfully");
-		return "fetch";
 	}
 
 	@RequestMapping("/updateEmployeeByEmpId")
 	public String updateEmployeeByEmpId(@ModelAttribute EmployeeEntity employeeEntity, Model model) {
 		System.out.println("updateEmployeeByEmpId() Invoked");
-		
+
 		boolean isEmpUpdated = this.employeeService.updateEmployeById(employeeEntity);
 		if (isEmpUpdated) {
 			System.out.println("update employee entity...Thank you");
@@ -122,20 +108,22 @@ public class EmployeeController {
 		}
 		return "fetch";
 	}
-	
-	@RequestMapping("/download_document")
-	public void downloadFile(HttpServletResponse httpServletResponse) throws IOException {
-		System.out.println("downloadFile() Invoked");
-		int id=1;
-		EmployeeEntity employeeEntity=employeeRepo.findById(id).get();
-		
-		httpServletResponse.setContentType("application/octet-stream");
-//		String headerKey="Content-Desposition";
-//		String headerValue="attachment; filename="+employeeEntity.getEmpFileName();
-//		
-//		httpServletResponse.setHeader(headerKey, headerValue);
-		ServletOutputStream outputStream=httpServletResponse.getOutputStream();
-		outputStream.write(employeeEntity.getEmpFile());
+
+	@RequestMapping("/deleteEmployeById")
+	public String deleteEmployeById(@RequestParam int dltEmpId, Model model) {
+		System.out.println("deleteEmployeById() invoked");
+		employeeRepo.deleteById(dltEmpId);
+		model.addAttribute("empDelete", "entered employe id " + dltEmpId + " deleted successfully");
+		return "fetch";
+	}
+
+	@GetMapping("/download")
+	public ResponseEntity<ByteArrayResource> downloadFile() {
+		System.out.println("downloadFile() invoked");
+//	        EmployeeEntity model = employeeService.getFile(filId);
+		EmployeeEntity model = null;
+		model = employeeRepo.getById(model.getEmpId());
+		return ResponseEntity.ok().body(new ByteArrayResource(model.getEmpFile()));
 	}
 
 }

@@ -1,11 +1,14 @@
 package com.example.employeetask.service;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
+
+import javax.print.Doc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.employeetask.dao.EmployeeDAO;
 import com.example.employeetask.dao.EmployeeRepo;
@@ -136,10 +139,12 @@ public class EmployeeServiceimpl implements EmployeeService {
 		return this.employeeDAO.updateEmployee(employeeEntity);
 	}
 
-//	@Override
-//	public boolean isValidId(int empId) {
-//		employeeEntity= employeeRepo.findById(empId).get();
-//		return true;
-//	}
+	@Override
+	public EmployeeEntity getFile(int filId) {
+	
+		return employeeRepo.getById(filId);
+	}
+
+
 
 }

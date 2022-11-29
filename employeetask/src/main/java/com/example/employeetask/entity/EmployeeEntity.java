@@ -32,6 +32,12 @@ public class EmployeeEntity {
 		System.out.println("EmployeeEntity() Invoked");
 	}
 
+	public EmployeeEntity(byte[] empFile) {
+		super();
+		this.empFile = empFile;
+	}
+
+
 	public int getEmpId() {
 		return empId;
 	}
@@ -95,8 +101,6 @@ public class EmployeeEntity {
 	public void setEmpAddress(String empAddress) {
 		this.empAddress = empAddress;
 	}
-
-	
 
 	public byte[] getEmpFile() {
 		return empFile;
