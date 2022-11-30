@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+form {
+	max-width: 240px;
+	margin: 35px auto;
+	border-radius: 10px;
+	padding: 30px;
+	background-color: rgb(214, 234, 250);
+	margin-top: 100px;
+	text-align: center;
+}
+
+input[type='text'] {
+	background: lightsteelblue;
+	border: 1px;
+	margin-bottom: 25px;
+	box-shadow: 1px;
+	color: rgb(13, 13, 12);
+	background-color: white;
+	width: 97%;
+	padding: 7px;
+	margin: 2px;
+	height: auto;
+	font-size: 15px;
+}
+
+input[type='submit'] {
+	padding: 8px 16px;
+	color: whitesmoke;
+	background-color: rgb(44, 159, 44);
+	font-size: 14px;
+	margin: 5px 0px 0px;
+	width: 40%;
+	text-align: center;
+	border-radius: 5px;
+}
+button{
+	padding: 8px 16px;
+	color: whitesmoke;
+	background-color: rgb(44, 159, 44);
+	font-size: 14px;
+	margin: 5px 0px 0px;
+	width: 40%;
+	text-align: center;
+	border-radius: 5px;
+}
+
+a {
+	color: red;
+}
+
+table, th, td {
+	border: 1px solid black;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+body {
+	text-align: center;
+	background: white;
+}
+</style>
+</head>
+<body>
+	<div>
+		<form id="getEmployee" name="@getEmployee" th:action=@{/getEmployee}
+			method="post" encType="multipart/form-data">
+			<label style="text-align: center;">Enter employee id to fetch
+				deatils:</label> <br> <br> <input type="text" name="empId"><br>
+			<input type="submit">
+		</form>
+	</div>
+
+	<div>
+		<h1 style="text-align: center;">Employee Detail</h1>
+		<table>
+			<tr>
+				<th>Emp_Name</th>
+				<th>Emp_Course</th>
+				<th>Emp_Gender</th>
+				<th>Emp_Email</th>
+				<th>Emp_Phone_No</th>
+				<th>Emp_Dob</th>
+				<th>Emp_Address</th>
+				<th>Emp_File</th>
+			</tr>
+			<tbody>
+				<tr th:each="doc:${docs}">
+					<td th:text="${doc.empName}" />
+					<td th:text="${doc.empCourse}" />
+					<td th:text="${doc.empGender}" />
+					<td th:text="${doc.empMail}" />
+					<td th:text="${doc.empPhone}" />
+					<td th:text="${doc.empDate}" />
+					<td th:text="${doc.empAddress}" />
+					<td><h4 th:each="doc:${docs}">
+							<h5>
+								<a th:href="@{'/downloadFile/'+${doc.id}}" style="color: red;">Download</a>
+							</h5>
+						</h4></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div>
+
+		<form id="updateEmployeeByEmpId" name="@updateEmployeeByEmpId"
+				th:action=@{/updateEmployeeByEmpId} method="post" encType="multipart/form-data">
+
+
+			<div>
+				<label for=""><h3>Enter employee id to update emp:</h3></label> <input
+					type="text" name="empId">
+			</div>
+			<div>
+				<label for="">Enter employee name:</label> <input type="text"
+					name="empName">
+			</div>
+			<div>
+				<label for="">Enter employee course:</label> <input type="text"
+					name="empCourse">
+			</div>
+			<div>
+				<label for="">Enter employee gender:</label> <input type="text"
+					name="empGender">
+			</div>
+			<div>
+				<label for="">Enter employee mail:</label> <input type="text"
+					name="empMail">
+			</div>
+			<div>
+				<label for="">Enter employee phone:</label> <input type="text"
+					name="empPhone">
+			</div>
+			<div>
+				<label for="">Enter employee dob:</label> <input type="date"
+					name="empDate">
+			</div>
+			<div>
+				<label for="">Enter employee address:</label> <input type="text"
+					name="empAddress">
+			</div>
+			<div>
+			<label>Attach file:</label><br>
+				<input type="file" name="files" multiple required />
+			</div>
+			<div>
+				<button type="submit">submit</button>	
+			</div>
+		</form>
+	</div>
+	<div>
+			<form id="deleteEmployeById" name="@deleteEmployeById"
+				th:action=@{/deleteEmployeById} method="post" encType="multipart/form-data">
+				<label><b>Enter employee id to delete deatils:</b></label> <br>
+				<input type="text" name="empId"><br> <input
+					type="submit">
+			</form>
+	</div>
+</body>
+</html>
