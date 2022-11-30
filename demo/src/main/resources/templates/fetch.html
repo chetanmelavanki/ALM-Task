@@ -72,7 +72,7 @@ body {
 			method="post" encType="multipart/form-data">
 			<label style="text-align: center;">Enter employee id to fetch
 				deatils:</label> <br> <br> <input type="text" name="empId"><br>
-			<input type="submit">
+			<input type="submit" value="Fetch Employee">
 		</form>
 	</div>
 
@@ -151,7 +151,7 @@ body {
 				<input type="file" name="files" multiple required />
 			</div>
 			<div>
-				<button type="submit">submit</button>	
+				<button type="submit">Update Employee</button>	
 			</div>
 		</form>
 	</div>
@@ -159,8 +159,8 @@ body {
 			<form id="deleteEmployeById" name="@deleteEmployeById"
 				th:action=@{/deleteEmployeById} method="post" encType="multipart/form-data">
 				<label><b>Enter employee id to delete deatils:</b></label> <br>
-				<input type="text" name="empId"><br> <input
-					type="submit">
+				<input type="text" name="empId" 
+					type="submit" value="Delete">
 			</form>
 	</div>
 </body>

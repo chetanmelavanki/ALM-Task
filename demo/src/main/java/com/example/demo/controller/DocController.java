@@ -30,6 +30,10 @@ public class DocController {
 	@Autowired
 	private DocRepository docRepository;
 	
+	public DocController() {
+		System.out.println("DocController()");
+	}
+	
 	@GetMapping("/")
 	public String get(Model model) {
 		List<Doc> docs=docStorageService.getFiles();

@@ -24,7 +24,7 @@ public class DocDAO {
 		Transaction transaction = null;
 //		Doc isEmployeeupated = false;
 		try {
-			System.out.println("try block");
+//			System.out.println("try block");
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			Query query = session.createNamedQuery("DOC.updateEmployeeByEmpId");
